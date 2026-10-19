@@ -42,3 +42,8 @@ function loadNotes(){
 function saveNotes(){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
 }
+
+function makeID(){
+    //app built for modern browsers only
+    return crypto.randomUUID();
+}
