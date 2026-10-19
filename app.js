@@ -47,3 +47,13 @@ function makeID(){
     //app built for modern browsers only
     return crypto.randomUUID();
 }
+
+// displaying the date on notes
+function dateFormat(dateString){
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return "Recent";
+    return new Intl.DateTimeFormat(undefined, {
+        month:"short",
+        day:"numeric"
+    }).format(date);
+}
