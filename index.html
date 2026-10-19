@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f7f5" />
+  <title>Notes — simple space for your thoughts</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Notes home">
+        <span class="brand-mark">n</span>
+        <span>notes</span>
+      </a>
+      <button id="new-note-button" class="new-note-button" type="button">
+        <span aria-hidden="true">＋</span> New note <kbd>⌘ N</kbd>
+      </button>
+      <div class="sidebar-label">YOUR SPACE</div>
+      <nav class="navigation" aria-label="Note filters">
+        <button class="nav-item active" type="button" data-filter="all">
+          <span class="nav-icon" aria-hidden="true">▤</span>
+          All notes <span id="all-count" class="nav-count">0</span>
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span>
+        <span>Saved on this device</span>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL SPACE</p>
+          <h1>Your notes</h1>
+          <p class="page-subtitle">A quiet place to think things through.</p>
+        </div>
+        <div class="topbar-actions">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="Search notes..." autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+          <button id="header-new-button" class="primary-button" type="button">＋ <span>New note</span></button>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Notes workspace">
+        <section class="notes-panel">
+          <div class="section-heading">
+            <h2 id="list-heading">All notes</h2>
+            <span id="visible-count" class="muted-count">0 notes</span>
+          </div>
+          <div id="notes-list" class="notes-list"></div>
+          <div id="empty-list" class="empty-state">
+            <div class="empty-icon">✳</div>
+            <h3>No notes yet</h3>
+            <p>Capture an idea before it slips away.</p>
+            <button id="empty-new-button" class="text-button" type="button">Create your first note <span>↗</span></button>
+          </div>
+          <div id="no-results" class="empty-state hidden">
+            <div class="empty-icon">⌕</div>
+            <h3>No matching notes</h3>
+            <p>Try another search term.</p>
+          </div>
+        </section>
+
+        <section class="editor-panel" aria-label="Note editor">
+          <div id="editor-empty" class="editor-empty">
+            <div class="editor-empty-symbol">✎</div>
+            <h3>Select a note to read</h3>
+            <p>Or create a new one to get started.</p>
+          </div>
+          <form id="note-form" class="note-form hidden">
+            <div class="editor-toolbar">
+              <span id="save-status" class="save-status"><span class="status-dot"></span> Saved</span>
+              <div class="editor-actions">
+                <button id="delete-note-button" class="icon-button danger-hover" type="button" title="Delete note" aria-label="Delete note">⌫</button>
+              </div>
+            </div>
+            <input id="note-title" class="note-title-input" type="text" placeholder="Untitled note" maxlength="120" aria-label="Note title" />
+            <div id="note-meta" class="note-meta">Created just now</div>
+            <textarea id="note-content" class="note-content-input" placeholder="Start writing your thoughts..." aria-label="Note content"></textarea>
+            <div class="editor-footer">
+              <span id="word-count">0 words</span>
+              <span>Autosaves as you type</span>
+            </div>
+          </form>
+        </section>
+      </section>
+      <footer class="page-footer"><span>Made for your thoughts.</span><span>Private to this browser · v1.0</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
