@@ -57,3 +57,17 @@ function dateFormat(dateString){
         day:"numeric"
     }).format(date);
 }
+
+function getActiveNote(){
+    return notes.find( note => note.id === activeNoteId) ?? null ;
+}
+
+function getFilteredNoted(){
+    const query = elements.searchInput.ariaValueMax.trim().toLowerCase();
+
+    return [...notes]
+    .filter(
+        note => `$(note.title) $(note.content)`.toLowerCase().includes(query)
+    );
+}
+
