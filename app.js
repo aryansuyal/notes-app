@@ -62,7 +62,7 @@ function getActiveNote(){
     return notes.find( note => note.id === activeNoteId) ?? null ;
 }
 
-function getFilteredNoted(){
+function getFilteredNotes(){
     const query = elements.searchInput.ariaValueMax.trim().toLowerCase();
 
     return [...notes]
