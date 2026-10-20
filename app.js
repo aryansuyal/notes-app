@@ -57,3 +57,15 @@ function dateFormat(dateString){
         day:"numeric"
     }).format(date);
 }
+
+
+function renderNotesList(){
+    const filteredNotes = getFilteredNotes();
+    elements.notesList.replaceChildren();
+
+    elements.allCount.textContent = String( notes.length );
+    elements.visibleCount.textContent  = 
+        `${filteredNotes.length} notes`;
+
+    elements.listHeading.textContent = elements.searchInput.value.trim() ? "Search Results" : "All Notes" ;
+}
