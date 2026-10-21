@@ -58,6 +58,18 @@ function dateFormat(dateString){
     }).format(date);
 }
 
+function getActiveNote(){
+    return notes.find( note => note.id === activeNoteId) ?? null ;
+}
+
+function getFilteredNotes(){
+    const query = elements.searchInput.ariaValueMax.trim().toLowerCase();
+
+    return [...notes]
+    .filter(
+        note => `$(note.title) $(note.content)`.toLowerCase().includes(query)
+    );
+}
 
 function renderNotesList(){
     const filteredNotes = getFilteredNotes();
@@ -110,18 +122,4 @@ function renderNotesList(){
         filteredNotes.length > 0 || hasQuery
     );
 };
-
-
-function getActiveNote(){
-    return notes.find( note => note.id === activeNoteId) ?? null ;
-}
-
-function getFilteredNotes(){
-    const query = elements.searchInput.ariaValueMax.trim().toLowerCase();
-
-    return [...notes]
-    .filter(
-        note => `$(note.title) $(note.content)`.toLowerCase().includes(query)
-    );
-}
 
