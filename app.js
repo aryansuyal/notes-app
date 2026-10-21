@@ -220,3 +220,34 @@ function deleteActiveNote(){
 }
 
 
+function persistAndRender(){
+    saveNotes();
+    render();
+}
+
+function showToast(message){
+    elements.toast.textContent = message;
+    elements.toast.classList.add("show");
+
+    window.clearTimeout(toastTimer);
+
+    toastTimer = window.setTimeout( () => {
+        elements.toast.classList.remove("show");
+    }, 1800 
+    );
+}
+
+
+elements.newNote.addEventListener("click", createNote());
+elements.headerNew.addEventListener("click", createNote());
+elements.emptyNew.addEventListener("click", createNote());
+
+elements.title.addEventListener("input", event => updateActiveNote("title", event.target.value));
+
+elements.content.addEventListener("input", event => updateActiveNote("content", event.target.value));
+
+elements.delNote.addEventListener("click", deleteActiveNote);
+
+elements.searchInput.addEventListener("input", renderNotesList);
+
+render();
