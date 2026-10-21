@@ -97,8 +97,21 @@ function renderNotesList(){
 
         });
         elements.notesList.append(button);
-    }
+        }
+    
+    const hasQuery = Boolean(elements.searchInput.value.trim());
+    elements.emptyList.classList.toggle(
+        "hidden",
+        filteredNotes.length > 0 || hasQuery
+    );
+
+    elements.noResults.classList.toggle(
+        "hidden",
+        filteredNotes.length > 0 || hasQuery
+    );
 };
+
+
 function getActiveNote(){
     return notes.find( note => note.id === activeNoteId) ?? null ;
 }
