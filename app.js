@@ -259,13 +259,6 @@ render();
 // in mac meta key is cmd
 
 document.addEventListener("keydown", event => {
-    // console.log({
-    //     key: event.key,
-    //     code: event.code,
-    //     metaKey: event.metaKey,
-    //     ctrlKey: event.ctrlKey,
-    //     altKey: event.altKey
-    // });
 
     if (
         event.metaKey &&
