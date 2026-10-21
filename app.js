@@ -69,3 +69,34 @@ function renderNotesList(){
 
     elements.listHeading.textContent = elements.searchInput.value.trim() ? "Search Results" : "All Notes" ;
 }
+
+for (const note of filteredNotes){
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `note-cards${note.id === activeNoteId ? "selected" : ""}`;
+
+
+    const title = document.createElement("span");
+    title.className = "note-card-title";
+    title.textContent = note.title.trim() || "Untitled Note";
+
+    const preview = document.createElement("span");
+    preview.className = "note-card-preview";
+    preview.textContent = note.content.trim() || "No additional text";
+
+
+    const date = document.createElement("span");
+    date.className = "note-card-date";
+    date.textContent =`Edited ${formatDate(note.updatedAt())}`;
+
+    button.append(title, preview, date);
+
+    button.addEventListener( 'click', () =>{
+        activeNoteId = note.id;
+        render();
+
+    });
+    elements.notesList.append(button);
+}
+
+
