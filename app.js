@@ -7,7 +7,7 @@ let activeNoteId = notes[0]?.id ?? null;
 let toastTimer;
 
 const elements = {
-    newNote : document.getElementsByClassName('new-note-button'),
+    newNote : document.getElementById('new-note-button'),
     headerNew : document.getElementById('header-new-button'),
     emptyNew : document.querySelector('#empty-new-button'),
     delNote : document.getElementById('delete-note-button'),
@@ -63,11 +63,11 @@ function getActiveNote(){
 }
 
 function getFilteredNotes(){
-    const query = elements.searchInput.ariaValueMax.trim().toLowerCase();
+    const query = elements.searchInput.value.trim().toLowerCase();
 
     return [...notes]
     .filter(
-        note => `$(note.title) $(note.content)`.toLowerCase().includes(query)
+        note => `${note.title} ${note.content}`.toLowerCase().includes(query)
     );
 }
 
@@ -99,7 +99,7 @@ function renderNotesList(){
 
         const date = document.createElement("span");
         date.className = "note-card-date";
-        date.textContent =`Edited ${formatDate(note.updatedAt())}`;
+        date.textContent =`Edited ${dateFormat(note.updatedAt)}`;
 
         button.append(title, preview, date);
 
@@ -210,7 +210,7 @@ function deleteActiveNote(){
 
     if ( !window.confirm(`Delete ${title} ? This action cannot be undone.`)) return;
 
-    notes = notes.filter(item => item.id === note.id);
+    notes = notes.filter(item => item.id !== note.id);
 
     activeNoteId = notes[0] ?.id ?? null ;
 
@@ -238,9 +238,9 @@ function showToast(message){
 }
 
 
-elements.newNote.addEventListener("click", createNote());
-elements.headerNew.addEventListener("click", createNote());
-elements.emptyNew.addEventListener("click", createNote());
+elements.newNote.addEventListener("click", createNote);
+elements.headerNew.addEventListener("click", createNote);
+elements.emptyNew.addEventListener("click", createNote);
 
 elements.title.addEventListener("input", event => updateActiveNote("title", event.target.value));
 
