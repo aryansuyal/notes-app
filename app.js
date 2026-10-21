@@ -251,3 +251,41 @@ elements.delNote.addEventListener("click", deleteActiveNote);
 elements.searchInput.addEventListener("input", renderNotesList);
 
 render();
+
+
+//adding shortcuts
+
+// document.addEventListener("keydown", event => {
+//     const isMac = navigator.platform.toUpperCase().includes("MAC");
+//     const modifier = isMac ? event.metaKey : event.ctrlKey;
+//     const alt = isMac ? event.optionKey : event.altKey;
+
+//     if (modifier &&
+//         alt &&
+//         event.key.toLowerCase() === "n") {
+//         event.preventDefault();
+//         createNote();
+//     }
+// })
+
+
+// in mac meta key is cmd
+
+document.addEventListener("keydown", event => {
+    // console.log({
+    //     key: event.key,
+    //     code: event.code,
+    //     metaKey: event.metaKey,
+    //     ctrlKey: event.ctrlKey,
+    //     altKey: event.altKey
+    // });
+
+    if (
+        event.metaKey &&
+        event.altKey &&
+        event.code === "KeyN"
+    ) {
+        event.preventDefault();
+        createNote();
+    }
+});
