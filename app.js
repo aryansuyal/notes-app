@@ -119,7 +119,104 @@ function renderNotesList(){
 
     elements.noResults.classList.toggle(
         "hidden",
-        filteredNotes.length > 0 || hasQuery
+        filteredNotes.length > 0 || !hasQuery
     );
 };
+
+function renderEditor(){
+    const note = getActiveNote();
+    const isOpen = Boolean(note);
+
+    elements.editorEmpty.classList.toggle("hidden", isOpen);
+    elements.form.classList.toggle("hidden", !isOpen);
+
+    if (!note) return;
+
+    if(
+        document.activeElement !== elements.title
+        &&
+        document.title.value !== note.title
+    ){
+        elements.title.value = note.title;
+    }
+
+    if(
+        document.activeElement !== elements.content
+        &&
+        elements.content.value !== note.content
+    ){
+        elements.content.value = note.content;
+    }
+
+
+    elements.meta.textContent =  `Created ${new Date(note.createdAt)}`;
+}
+
+
+function render(){
+    renderNotesList();
+    renderEditor();
+}
+
+function createNote(){
+    const now = new Date().toISOString();
+
+    const note = {
+        id : makeID(),
+        title: "",
+        content: "",
+        createdAt: now,
+        updatedAt: now,
+    };
+
+
+    notes.unshift(note);
+    activeNoteId = note.id;
+    persistAndRender();
+    elements.title.focus();
+    showToast("New Note Created");
+}
+
+
+function updateActiveNote(field, value){
+    const note = getActiveNote();
+
+    if (!note) return;
+
+    note[field] = value;
+    note.updatedAt = new Date().toISOString;
+
+
+    elements.saveStatus.innerHTML = `<span class="status-dot"></span> Saving...`;
+
+    saveNotes();
+    renderNotesList();
+
+    //debouncing the function calls to trigger only when 250 ms gap occurs
+    window.clearTimeout('toastTimer');
+
+
+    toastTimer = window.setTimeout( () => {
+        elements.saveStatus.innerHTML = `<span class="status-dot"></span> Saved`
+    }, 250);
+}
+
+function deleteActiveNote(){
+    const note = getActiveNote();
+
+    if (!note) return;
+
+    const title = note.title.trim() || "Untitled Note";
+
+    if ( !window.confirm(`Delete ${title} ? This action cannot be undone.`)) return;
+
+    notes = notes.filter(item => item.id === note.id);
+
+    activeNoteId = notes[0] ?.id ?? null ;
+
+    persistAndRender();
+    showToast("Note Deleted");
+
+}
+
 
