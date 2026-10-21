@@ -255,19 +255,6 @@ render();
 
 //adding shortcuts
 
-// document.addEventListener("keydown", event => {
-//     const isMac = navigator.platform.toUpperCase().includes("MAC");
-//     const modifier = isMac ? event.metaKey : event.ctrlKey;
-//     const alt = isMac ? event.optionKey : event.altKey;
-
-//     if (modifier &&
-//         alt &&
-//         event.key.toLowerCase() === "n") {
-//         event.preventDefault();
-//         createNote();
-//     }
-// })
-
 
 // in mac meta key is cmd
 
